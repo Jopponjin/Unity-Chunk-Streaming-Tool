@@ -1027,6 +1027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetBundleList: []
   chunkOrder: []
+  scenePrefabs: []
   spawnPostions:
   - {x: 100, y: 0, z: 0}
   - {x: 200, y: 0, z: 0}
@@ -1034,7 +1035,6 @@ MonoBehaviour:
   - {x: 400, y: 0, z: 0}
   chunkIndex: 0
   lastChunkSpawned: {fileID: 0}
-  latestSpawnedChunk: {fileID: 0}
   loadedPrefabScene: {fileID: 0}
   chunkSpawnPosition: {fileID: 0}
   preLoadChunk: 1
