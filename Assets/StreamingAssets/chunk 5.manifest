@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 4109612904
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5f00c7b61b85c76e5adbce92b5729d70
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4f3096f2d88079fb9134c0ffd3fb09bb
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: f34499757166fea4885713f0b527c114, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefab/Scene5Prefab.prefab
+Dependencies: []
