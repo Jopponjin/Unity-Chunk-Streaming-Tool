@@ -22,7 +22,6 @@ public class ChunkLoader : MonoBehaviour
         string[] assetBundles = AssetDatabase.GetAllAssetBundleNames();
 
 
-
         for (int i = 0; i < assetBundles.Length; i++)
         {
             if (assetBundles[i].Contains("chunk"))
@@ -35,7 +34,5 @@ public class ChunkLoader : MonoBehaviour
 
 
         chunkSpawner.AllocateChunksToMemory();
-
-        chunkSpawner.SetSpawnPositions();
     }
 }
