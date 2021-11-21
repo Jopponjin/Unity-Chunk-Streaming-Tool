@@ -1,19 +1,34 @@
 ManifestFileVersion: 0
-CRC: 3080294787
+CRC: 257461219
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: chunk 1
-      Dependencies: {}
-    Info_1:
-      Name: chunk 2
-      Dependencies: {}
-    Info_2:
-      Name: chunk 3
-      Dependencies: {}
-    Info_3:
       Name: chunk 4
       Dependencies: {}
+    Info_1:
+      Name: chunk 9
+      Dependencies: {}
+    Info_2:
+      Name: chunk 2
+      Dependencies: {}
+    Info_3:
+      Name: chunk 7
+      Dependencies: {}
     Info_4:
+      Name: chunk 10
+      Dependencies: {}
+    Info_5:
       Name: chunk 5
+      Dependencies: {}
+    Info_6:
+      Name: chunk 3
+      Dependencies: {}
+    Info_7:
+      Name: chunk 8
+      Dependencies: {}
+    Info_8:
+      Name: chunk 1
+      Dependencies: {}
+    Info_9:
+      Name: chunk 6
       Dependencies: {}

@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34499757166fea4885713f0b527c114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenePrefabPosition: {x: 500, y: 0, z: -50}
-  isMemoryClearChunk: 0
+  scenePrefabPosition: {x: 0, y: 0, z: 500}
+  isMemoryClearChunk: 1
 --- !u!1001 &1960718640877455354
 PrefabInstance:
   m_ObjectHideFlags: 0
