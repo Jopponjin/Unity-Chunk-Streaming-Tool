@@ -21,8 +21,6 @@ public class ChunkSpawner : MonoBehaviour
     public bool preLoadByTrigger = false;
     public bool purgeByTrigger = false;
     [Space]
-    public int preLoadChunkAmount = 5;
-    [Space]
     public bool overideSetSpawnPoints = true;
 
     // ---------------------------------------- Core Asset Logic ---------------------------- //
@@ -76,8 +74,6 @@ public class ChunkSpawner : MonoBehaviour
                 Debug.Log("LoadChunksFromAssets GameObject IS null!");
             }
         }
-        
-
     }
 
     public void SpawnNextChunk()
@@ -113,7 +109,7 @@ public class ChunkSpawner : MonoBehaviour
                     chunkIndex++;
                 }
             }
-            if (loadedPrefabScene.GetComponent<ChunkData>().isMemoryClearChunk)
+            if (loadedPrefabScene.GetComponent<ChunkData>().isMemoryClearChunk && purgeByTrigger)
             {
                 PurgeLoadedChunks();
             }
@@ -160,7 +156,7 @@ public class ChunkSpawner : MonoBehaviour
 
         for (int i = 0; i < spawnedPrefabs.Count; i++)
         {
-            if (spawnedPrefabs[i] != savedCurrentScene)
+            if (spawnedPrefabs[i] != savedCurrentScene && spawnedPrefabs[i] != null)
             {
                 loadedPrefabScene = spawnedPrefabs[i];
 
@@ -168,21 +164,14 @@ public class ChunkSpawner : MonoBehaviour
 
                 Debug.LogWarning(loadedPrefabScene.name + " has been pruged!");
             }
+            else if(preLoadByTrigger)  
+            {
+
+            }  
         }
 
         Resources.UnloadUnusedAssets();
         GC.Collect();
-
-        if (preLoadChunk)
-        {
-            for (int i = 0; i < spawnedPrefabs.Count; i++)
-            {
-                if (spawnedPrefabs[i] == null)
-                {
-                    spawnedPrefabs.RemoveAt(i);
-                }
-            }
-        }
     }
 
     public void RemoveLastChunk()

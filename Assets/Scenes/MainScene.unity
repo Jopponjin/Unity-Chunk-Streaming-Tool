@@ -1136,9 +1136,9 @@ MonoBehaviour:
   - {x: 1000, y: 0, z: 0}
   chunkIndex: 0
   loadedPrefabScene: {fileID: 0}
-  preLoadChunk: 1
+  preLoadChunk: 0
   preLoadByTrigger: 0
-  purgeByTrigger: 1
+  purgeByTrigger: 0
   preLoadChunkAmount: 5
   overideSetSpawnPoints: 0
 --- !u!114 &1252472954
