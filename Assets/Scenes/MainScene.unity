@@ -1139,7 +1139,6 @@ MonoBehaviour:
   preLoadChunk: 0
   preLoadByTrigger: 0
   purgeByTrigger: 0
-  preLoadChunkAmount: 5
   overideSetSpawnPoints: 0
 --- !u!114 &1252472954
 MonoBehaviour:

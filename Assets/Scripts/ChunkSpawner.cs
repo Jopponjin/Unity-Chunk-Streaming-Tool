@@ -7,29 +7,28 @@ using UnityEditor;
 public class ChunkSpawner : MonoBehaviour
 {
     public List<AssetBundle> assetBundleList;
-    public List<GameObject> scenePrefabs = new List<GameObject>();
-    public List<GameObject> spawnedPrefabs = new List<GameObject>();
+    [SerializeField] List<GameObject> scenePrefabs = new List<GameObject>();
+    [SerializeField] List<GameObject> spawnedPrefabs = new List<GameObject>();
 
-    public List<Vector3> spawnPostions = new List<Vector3>();
+    [SerializeField] List<Vector3> spawnPostions = new List<Vector3>();
     [Space]
-    public int chunkIndex = 0;
+    [SerializeField] int chunkIndex = 0;
     [Space]
-    public GameObject loadedPrefabScene;
+    [SerializeField] GameObject loadedPrefabScene;
     [Space]
-    public bool preLoadChunk = false;
+    [SerializeField] bool preLoadChunk = false;
+    [SerializeField] bool purgeByTrigger = false;
+    [Space]
+    [SerializeField] bool overideSetSpawnPoints = true;
 
-    public bool preLoadByTrigger = false;
-    public bool purgeByTrigger = false;
-    [Space]
-    public bool overideSetSpawnPoints = true;
 
     // ---------------------------------------- Core Asset Logic ---------------------------- //
+
 
     public void AllocateChunksToMemory()
     {
         if (preLoadChunk)
         {
-            Debug.LogWarning("LoadChunksFromAssets called!");
             LoadChunksFromAssets();
         }
         for (int i = 0; i < assetBundleList.Count; i++)
@@ -50,24 +49,17 @@ public class ChunkSpawner : MonoBehaviour
 
     public void LoadChunksFromAssets()
     {
-        Debug.LogWarning("LoadChunksFromAssets has been called!");
-
         if (assetBundleList.Count == 0)
         {
             Debug.LogWarning("assetBundleList.Count is 0!");
         }
-
         for (int i = 0; i < assetBundleList.Count; i++)
         {
             var scenePrefab = assetBundleList[i].LoadAllAssets().GetValue(0) as GameObject;
 
-            Debug.LogWarning("assetBundleList[i].LoadAllAssets() called!");
-
             if (scenePrefab)
             {
-                
                 scenePrefabs.Add(scenePrefab);
-                Debug.Log(scenePrefab.name + "is being added to List!");
             }
             else
             {
@@ -75,6 +67,7 @@ public class ChunkSpawner : MonoBehaviour
             }
         }
     }
+
 
     public void SpawnNextChunk()
     {
@@ -86,18 +79,13 @@ public class ChunkSpawner : MonoBehaviour
                 spawnedPrefabs.Add(loadedPrefabScene);
                 SetSpawnPositions();
                 chunkIndex++;
-                Debug.Log(loadedPrefabScene.name + " is being loaded from assets.");
             }
             else
             {
                 loadedPrefabScene = assetBundleList[chunkIndex].LoadAllAssets().GetValue(0) as GameObject;
 
-                Debug.Log(loadedPrefabScene.name + " is being loaded from assets.");
-
                 if (loadedPrefabScene)
                 {
-                    Debug.Log(loadedPrefabScene.name + " Is loaded to memory.");
-
                     loadedPrefabScene = Instantiate
                         (
                         loadedPrefabScene,
@@ -116,7 +104,7 @@ public class ChunkSpawner : MonoBehaviour
         }
     }
 
-
+    // Any prefabs spawned to dont get affected by the SetSpawnPositions() logic if they have Postitions set in ChunkData.cs
     public void SetSpawnPositions()
     {
         ChunkData spawnedPrefabData = loadedPrefabScene.GetComponent<ChunkData>();
@@ -124,14 +112,11 @@ public class ChunkSpawner : MonoBehaviour
         if (!overideSetSpawnPoints && spawnPostions[chunkIndex] != Vector3.zero)
         {
             loadedPrefabScene.transform.position = spawnPostions[chunkIndex];
-
-            Debug.Log(loadedPrefabScene.name + "!overideSetSpawnPoints && spawnPostions[chunkIndex] != null");
         }
         else if(!overideSetSpawnPoints)
         {
             if (chunkIndex > 1)
             {
-                Debug.LogWarning("The spawned prefab: " + loadedPrefabScene.name + " saved position is Vector(0,0,0).");
                 spawnedPrefabData.transform.position =
                 new Vector3(spawnedPrefabs[chunkIndex - 1].GetComponent<ChunkData>().scenePrefabPosition.x + 100f, 0f, 0f);
             }
@@ -142,13 +127,12 @@ public class ChunkSpawner : MonoBehaviour
         }
         if (spawnedPrefabData.scenePrefabPosition == Vector3.zero && spawnedPrefabs.Count != 0)
         {
-            Debug.LogWarning("The spawned prefab: " + loadedPrefabScene.name + " saved position is Vector(0,0,0).");
             spawnedPrefabData.transform.position =
                 new Vector3(spawnedPrefabs[chunkIndex - 1].GetComponent<ChunkData>().scenePrefabPosition.x + 100f, 0f, 0f);
         }
     }
 
-    // -------------------------------------------- Memory Chunk logic ----------------------- //
+    // -------------------------------------------- Memory Mangement logic ----------------------- //
 
     public void PurgeLoadedChunks()
     {
@@ -160,19 +144,13 @@ public class ChunkSpawner : MonoBehaviour
             {
                 loadedPrefabScene = spawnedPrefabs[i];
 
-                GameObject.Destroy(loadedPrefabScene);
-
-                Debug.LogWarning(loadedPrefabScene.name + " has been pruged!");
+                Destroy(loadedPrefabScene);
             }
-            else if(preLoadByTrigger)  
-            {
-
-            }  
         }
-
         Resources.UnloadUnusedAssets();
         GC.Collect();
     }
+
 
     public void RemoveLastChunk()
     {

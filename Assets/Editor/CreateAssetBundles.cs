@@ -18,5 +18,4 @@ public class CreateAssetBundles
 
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.UncompressedAssetBundle, BuildTarget.StandaloneWindows);
     }
-
 }
